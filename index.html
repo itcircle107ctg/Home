@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সার্কেল-১০৭, কর অঞ্চল-৫, চট্টগ্রাম | এনবিআর পোর্টাল</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalpurush&family=Noto+Serif+Bengali:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #006a4e;      /* NBR Dark Green */
+            --primary-dark: #004d38;
+            --accent: #f42a41;       /* BD Red Accent */
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border: #cbd5e1;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif Bengali', 'Kalpurush', 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* Enforce English font for English elements */
+        .en-font {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- Header & Banner --- */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .gov-logo {
+            width: 75px;
+            height: 75px;
+            margin-bottom: 0.75rem;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .coverage-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(5px);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* --- Main Layout --- */
+        .main-container {
+            display: block;
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            background: var(--surface);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        /* --- Section 1: Calculator --- */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+            background-color: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.15);
+        }
+
+        .btn-calc {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-calc:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .calc-result {
+            background-color: var(--bg-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed var(--border);
+            font-size: 0.95rem;
+        }
+
+        .result-item.total {
+            border-bottom: none;
+            border-top: 2px solid var(--primary);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+        }
+
+        .slabs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .slabs-table th, .slabs-table td {
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .slabs-table th {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- Section 2: IT Forms --- */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .form-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: white;
+        }
+
+        .form-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .form-info {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .form-info i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .form-info div span {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .form-info div small {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .btn-download {
+            background-color: rgba(0, 106, 78, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* --- Section 3 & Section 4: External Action Cards --- */
+        .action-card-container {
+            background: #f1f5f9;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .action-card-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .badge-gemini {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .badge-audit {
+            background: #e0f2fe;
+            color: #0369a1;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: white;
+            padding: 0.85rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-gemini {
+            background-color: #7c3aed;
+            box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.25);
+        }
+
+        .btn-gemini:hover {
+            background-color: #6d28d9;
+        }
+
+        .btn-audit {
+            background-color: #2563eb;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-audit:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* --- Section 5: Dynamic Cards Grid --- */
+        .pdf-boxes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pdf-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pdf-box:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+
+        .pdf-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .pdf-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .govt-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+
+        .gov-link-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem 0.6rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gov-link-card i {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .gov-link-card span {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .gov-link-card:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .gov-link-card:hover i {
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.8rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        .print-document-heading { display: none; }
+        .print-meta { color: var(--text-muted); font-size: .9rem; margin-bottom: .75rem; }
+        .result-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .btn-print {
+            border: 0; border-radius: 8px; padding: .65rem 1rem; cursor: pointer;
+            color: #fff; background: #2563eb; font-weight: 600;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+            white-space: nowrap;
+        }
+        .btn-print:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(37,99,235,.22); }
+        @page { size: A4 portrait; margin: 15mm; }
+        @media print {
+            html, body { background: #fff !important; width: 100% !important; }
+            body * { visibility: hidden !important; }
+            #taxResultPrintArea, #taxResultPrintArea * { visibility: visible !important; }
+            #taxResultPrintArea {
+                position: absolute !important; left: 0 !important; top: 0 !important;
+                width: 100% !important; margin: 0 !important; padding: 0 !important;
+                border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+                background: #fff !important; color: #111 !important;
+                font-size: 11pt !important;
+            }
+            #taxResultPrintArea .print-document-heading {
+                display: block !important; text-align: center; margin-bottom: 18px;
+                padding-bottom: 10px; border-bottom: 1.5px solid #333;
+            }
+            #taxResultPrintArea .print-document-heading h2 { margin: 0 0 4px; font-size: 17pt; }
+            #taxResultPrintArea .print-document-heading h3 { margin: 0 0 7px; font-size: 13pt; }
+            #taxResultPrintArea .print-document-heading p { margin: 0; font-size: 12pt; font-weight: 700; }
+            #taxResultPrintArea .result-toolbar { display: block !important; }
+            #taxResultPrintArea .btn-print { display: none !important; }
+            #taxResultPrintArea .result-item { color: #111 !important; border-color: #aaa !important; }
+            #taxResultPrintArea .result-item.total { color: #111 !important; border-top: 2px solid #333 !important; }
+            #taxResultPrintArea .slabs-table { width: 100% !important; font-size: 10pt !important; page-break-inside: avoid; }
+            #taxResultPrintArea .slabs-table th, #taxResultPrintArea .slabs-table td {
+                color: #111 !important; background: #fff !important; border: 1px solid #777 !important;
+                padding: 7px !important;
+            }
+            #taxResultPrintArea h5 { color: #111 !important; }
+            #taxResultPrintArea small { color: #333 !important; }
+            #taxResultPrintArea tr { page-break-inside: avoid; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header / Banner Section -->
+    <header>
+        <div class="header-container">
+            <svg class="gov-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#F42A41"/>
+                <circle cx="50" cy="50" r="22" fill="#006A4E"/>
+            </svg>
+            <h1>জাতীয় রাজস্ব বোর্ড (এনবিআর)</h1>
+            <h2 class="department-title">আয়কর বিভাগ</h2>
+            <h2>সার্কেল-১০৭, কর অঞ্চল-৫, চট্টগ্রাম</h2>
+            <div class="coverage-badge">
+                <i class="fa-solid fa-location-dot"></i>
+                এলাকা এখতিয়ার: চট্টগ্রাম সিটি কর্পোরেশন, ওয়ার্ড নং – ১৫, বাগমনিরাম
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- SECTION 1: Tax Slabs & Calculator -->
+        <section id="calculator-section">
+            <div class="section-title">
+                <i class="fa-solid fa-calculator"></i>
+                আয়কর স্ল্যাব ও অটো ক্যালকুলেটর
+            </div>
+            
+            <div class="calculator-grid">
+                <!-- Inputs Panel -->
+                <div class="calc-inputs">
+                    <div class="form-group">
+                        <label for="taxYear"><i class="fa-solid fa-calendar-days"></i> কর বর্ষ (Assessment Year)</label>
+                        <select id="taxYear" class="form-control" onchange="calculateTax()">
+                            <option value="2026-2027" selected>২০২৬–২০২৭ করবর্ষ</option>
+                            <option value="2025-2026">২০২৫–২০২৬ করবর্ষ</option>
+                            <option value="2024-2025">২০২৪–২০২৫ করবর্ষ</option>
+                            <option value="2023-2024">২০২৩–২০২৪ করবর্ষ</option>
+                            <option value="2022-2023">২০২২–২০২৩ করবর্ষ</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category"><i class="fa-solid fa-user-tag"></i> করদাতার শ্রেণী</label>
+                        <select id="category" class="form-control" onchange="calculateTax()">
+                            <option value="general">সাধারণ করদাতা</option>
+                            <option value="women_senior">নারী ও ৬৫ বছর বা তদূর্ধ্ব জ্যেষ্ঠ নাগরিক</option>
+                            <option value="disabled">শারীরিক প্রতিবন্ধী করদাতা</option>
+                            <option value="third_gender">তৃতীয় লিঙ্গের করদাতা</option>
+                            <option value="war_fighter">গেজেটভুক্ত যুদ্ধাহত মুক্তিযোদ্ধা</option>
+                            <option value="july_warrior">গেজেটভুক্ত জুলাই যোদ্ধা (২০২৬–২৭ থেকে)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="annualIncome"><i class="fa-solid fa-money-bill-wave"></i> মোট বাৎসরিক আয় (টাকা)</label>
+                        <input type="number" id="annualIncome" class="form-control" placeholder="যেমন: ৬০০০০০" value="600000" oninput="calculateTax()">
+                    </div>
+
+                    <button class="btn-calc" onclick="calculateTax()"><i class="fa-solid fa-rotate"></i> কর হিসাব পুনঃগণনা করুন</button>
+                </div>
+
+                <!-- Output Panel -->
+                <div class="calc-result" id="taxResultPrintArea">
+                    <div class="print-document-heading">
+                        <h2>জাতীয় রাজস্ব বোর্ড</h2>
+                        <h3>আয়কর বিভাগ</h3>
+                        <p>আয়কর হিসাবের বিবরণী</p>
+                    </div>
+                    <div id="printMeta" class="print-meta"></div>
+                    <div class="result-toolbar">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-main); font-size: 1.1rem;">কর হিসাবের সংক্ষিপ্ত বিবরণী</h4>
+                        <button type="button" class="btn-print" onclick="printTaxResult()"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
+                    </div>
+                    <div class="result-item">
+                        <span>করমুক্ত আয়ের সীমা:</span>
+                        <strong id="resExemption">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>করযোগ্য মোট আয়:</span>
+                        <strong id="resTaxable">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>গণনাকৃত মোট কর:</span>
+                        <strong id="resGrossTax">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>সর্বনিম্ন কর (সিটি কর্পোরেশন এলাকা):</span>
+                        <strong id="resMinTax">৳ ৫,০০০</strong>
+                    </div>
+                    <div class="result-item total">
+                        <span>প্রদেয় নিট আয়কর:</span>
+                        <strong id="resNetTax">৳ ০</strong>
+                    </div>
+
+                    <!-- Applicable Slabs Table -->
+                    <h5 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">প্রযোজ্য আয়কর স্ল্যাবসমূহ</h5>
+                    <table class="slabs-table">
+                        <thead>
+                            <tr>
+                                <th>আয়ের ধাপ</th>
+                                <th>কর হার</th>
+                                <th>এই ধাপে কর</th>
+                            </tr>
+                        </thead>
+                        <tbody id="slabsTableBody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p style="margin-top:1rem;color:var(--text-muted);font-size:.86rem">
+                নোট: ২০২৬–২৭ করবর্ষের স্ল্যাব ও বিশেষ শ্রেণির করমুক্ত সীমা প্রদত্ত পরিপত্রের ছক অনুযায়ী। এটি ব্যক্তিশ্রেণির সাধারণ স্ল্যাবভিত্তিক আনুমানিক হিসাব; বিনিয়োগ রেয়াত, উৎসে কর, সারচার্জ, বিশেষ আয় ও অন্যান্য সমন্বয় এতে অন্তর্ভুক্ত নয়।
+            </p>
+        </section>
+
+        <!-- Downloadable IT Forms -->
+        <section id="forms-section">
+            <div class="section-title">
+                <i class="fa-solid fa-file-word"></i>
+                আয়কর ফরমসমূহ (ডাউনলোড)
+            </div>
+            <p style="margin-bottom: 1.25rem; color: var(--text-muted); font-size: 0.95rem;">
+                নির্দিষ্ট নোটিশ ও স্বীকৃতিপত্রের Word ফাইল ডাউনলোড করুন। অন্যান্য আয়কর ফরমের জন্য NBR-এর অফিসিয়াল ফরম পোর্টাল ব্যবহার করুন।
+            </p>
+            <div class="forms-grid">
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-13 (2023)</span><small>Notice of Section 179</small></div></div><a href="https://bdtaxation.com/uploads/IT-13%20(2023)-%20Notice%20of%20Sec%20179.docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-15 (2023)</span><small>Notice of Section 214</small></div></div><a href="https://bdtaxation.com/uploads/IT-15%20(2023)-%20Notice%20of%20Sec%20214.docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-57 (2023)</span><small>Acknowledgement</small></div></div><a href="https://bdtaxation.com/uploads/IT-57%20(2023)-%20Acknowledgement.docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-86 (2023)</span><small>Notice of Section 183(3)</small></div></div><a href="https://bdtaxation.com/uploads/IT-86%20(2023)-%20Notice%20of%20Sec%20183(3).docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-90 (2023)</span><small>Notice of Section 212</small></div></div><a href="https://bdtaxation.com/uploads/IT-90%20(2023)-%20Notice%20of%20Sec%20212.docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-file-word"></i><div><span>IT-124 (2023)</span><small>Notice of Section 280</small></div></div><a href="https://bdtaxation.com/uploads/IT-124%20(2023)%20-%20Notice%20of%20Sec%20280.docx" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-download"></i> ডাউনলোড</a></div>
+                <div class="form-card"><div class="form-info"><i class="fa-solid fa-folder-open"></i><div><span>NBR Other Income Tax Forms</span><small>জাতীয় রাজস্ব বোর্ডের অন্যান্য ফরম</small></div></div><a href="https://nbr.gov.bd/form/income-tax/eng" target="_blank" rel="noopener noreferrer" class="btn-download"><i class="fa-solid fa-arrow-up-right-from-square"></i> ফরম দেখুন</a></div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Gemini Notebook -->
+        <section id="gemini-section">
+            <div class="section-title">
+                <i class="fa-solid fa-brain"></i>
+                জেমিনি নোটবুক (Gemini Notebook)
+            </div>
+            <div class="action-card-container">
+                <span class="action-card-badge badge-gemini"><i class="fa-solid fa-book-bookmark"></i> আয়কর আইন ও জট সমাধান পোর্টাল</span>
+                <h3 style="margin-bottom: 0.75rem; color: var(--text-main);">আয়কর আইন ও জটিলতা সমাধানের নলেজ বেস</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">
+                    আয়কর আইন ২০২৩, বিনিয়োগ রেয়াত এবং সার্কেল-১০৭ সম্পর্কিত যেকোনো প্রশ্ন বা তথ্যের সমাধানের জন্য আমাদের জেমিনি নোটবুক পোর্টালে সরাসরি প্রবেশ করুন।
+                </p>
+                <a href="https://notebook.google.com/notebook/62ee3963-a35d-4df4-ba2c-fdd952701264" target="_blank" rel="noopener noreferrer" class="btn-action btn-gemini">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> জেমিনি নোটবুক ওপেন করুন (NotebookLM)
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Audit Checker -->
+        <section id="audit-section">
+            <div class="section-title">
+                <i class="fa-solid fa-shield-halved"></i>
+                অডিট চেকার (Audit Checker)
+            </div>
+            <div class="action-card-container">
+                <span class="action-card-badge badge-audit"><i class="fa-solid fa-check-circle"></i> অনলাইন অডিট ভেরিফিকেশন পোর্টাল</span>
+                <h3 style="margin-bottom: 0.75rem; color: var(--text-main);">আপনার আয়কর ফাইল বা অডিট স্ট্যাটাস যাচাই করুন</h3>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">
+                    সাপ্রো কনসাল্টিং অনলাইন অডিট ভেরিফিকেশন টুলের মাধ্যমে আপনার ফাইলের অডিট ঝুঁকি ও বর্তমান হালনাগাদ তথ্য তাত্ক্ষণিকভাবে পরীক্ষা করে নিন।
+                </p>
+                <a href="https://saproconsultingbd.com/audit-checker" target="_blank" rel="noopener noreferrer" class="btn-action btn-audit">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> অডিট চেকার ওপেন করুন (Sapro Consulting)
+                </a>
+            </div>
+        </section>
+
+        <!-- Important Official Documents & Links -->
+        <section id="section-5">
+            <div class="section-title"><i class="fa-solid fa-folder-open"></i> গুরুত্বপূর্ণ সরকারি নথি ও প্রয়োজনীয় লিংক</div>
+            <h4 style="margin-bottom:1rem;color:var(--text-main)" class="en-font">Income Tax Circulars & Guidelines</h4>
+            <p style="margin-bottom:1rem;color:var(--text-muted)">২০২২–২৩ থেকে ২০২৬–২৭ করবর্ষের পরিপত্র, কর নির্দেশিকা ও সংশ্লিষ্ট নথি NBR-এর অফিসিয়াল পোর্টালে পাওয়া যাবে।</p>
+            <div class="pdf-boxes-grid en-font">
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Paripatra 2026–27</div></div><a href="https://nbr.gov.bd/uploads/paripatra/Aykor_Poripothro_2026-2027_BG_Press_Modify_Copy.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">Open PDF</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Paripatra 2025–26</div></div><a href="https://nbr.gov.bd/uploads/paripatra/Income-tax_Paripatra_2025-20261.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">Open PDF</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Paripatra 2024–25</div></div><a href="https://nbr.gov.bd/taxtypes/income-tax/income-tax-paripatra/eng" target="_blank" rel="noopener noreferrer" class="btn-download">NBR Portal</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Paripatra 2023–24</div></div><a href="https://nbr.gov.bd/taxtypes/income-tax/income-tax-paripatra/eng" target="_blank" rel="noopener noreferrer" class="btn-download">NBR Portal</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Paripatra 2022–23</div></div><a href="https://nbr.gov.bd/uploads/paripatra/Paripatra_2022-2023_.pdf" target="_blank" rel="noopener noreferrer" class="btn-download">Open PDF</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-file-pdf"></i></div><div class="pdf-title">Income Tax Act 2023 & Other Acts</div></div><a href="https://nbr.gov.bd/taxtypes/income-tax/income-tax-paripatra/eng" target="_blank" rel="noopener noreferrer" class="btn-download">NBR Portal</a></div>
+                <div class="pdf-box"><div><div class="pdf-icon"><i class="fa-solid fa-book"></i></div><div class="pdf-title">Income Tax Nirdeshika 2026–27</div></div><a href="https://nbr.gov.bd/taxtypes/income-tax/income-tax-paripatra/eng" target="_blank" rel="noopener noreferrer" class="btn-download">NBR Portal</a></div>
+            </div>
+            <h4 style="margin-top:1.8rem;margin-bottom:1rem;color:var(--text-main)" class="en-font">Essential Government Links</h4>
+            <div class="govt-links-grid en-font">
+                <a href="https://etds.gov.bd" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-globe"></i><span>e-TDS Portal</span></a>
+                <a href="https://secure.incometax.gov.bd/TINHome" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-id-card"></i><span>e-TIN Registration</span></a>
+                <a href="https://ibas.finance.gov.bd/acs" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-receipt"></i><span>A-Challan Portal</span></a>
+                <a href="https://nbr.gov.bd" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-building-columns"></i><span>NBR Official Website</span></a>
+                <a href="https://billpay.sonalibank.com.bd/" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-credit-card"></i><span>Sonali Bank Bill Payment</span></a>
+                <a href="https://etaxnbr.gov.bd" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-laptop-code"></i><span>e-Return Website</span></a>
+                <a href="https://etaxnbr.gov.bd/verify" target="_blank" rel="noopener noreferrer" class="gov-link-card"><i class="fa-solid fa-shield-halved"></i><span>Return Verification</span></a>
+            </div>
+        </section>
+
+    <footer>
+        <p>© সার্কেল-১০৭, কর অঞ্চল-৫, চট্টগ্রাম | জাতীয় রাজস্ব বোর্ড (এনবিআর), গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+        // Individual taxpayer slab data: tax years 2022-23 to 2026-27.
+        // Slab limits are incremental amounts above the applicable tax-free threshold.
+        const TAX_RULES = {
+            "2022-2023": {
+                thresholds: { general: 300000, women_senior: 350000, disabled: 450000, third_gender: 350000, war_fighter: 475000, july_warrior: null },
+                slabs: [
+                    { limit: 100000, rate: 0.05 }, { limit: 300000, rate: 0.10 },
+                    { limit: 400000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
+                    { limit: Infinity, rate: 0.25 }
+                ]
+            },
+            "2023-2024": {
+                thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 400000, war_fighter: 500000, july_warrior: null },
+                slabs: [
+                    { limit: 100000, rate: 0.05 }, { limit: 300000, rate: 0.10 },
+                    { limit: 400000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
+                    { limit: Infinity, rate: 0.25 }
+                ]
+            },
+            "2024-2025": {
+                thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 475000, war_fighter: 500000, july_warrior: null },
+                slabs: [
+                    { limit: 100000, rate: 0.05 }, { limit: 400000, rate: 0.10 },
+                    { limit: 500000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
+                    { limit: 2000000, rate: 0.25 }, { limit: Infinity, rate: 0.30 }
+                ]
+            },
+            "2025-2026": {
+                thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 475000, war_fighter: 500000, july_warrior: null },
+                slabs: [
+                    { limit: 100000, rate: 0.05 }, { limit: 400000, rate: 0.10 },
+                    { limit: 500000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
+                    { limit: 2000000, rate: 0.25 }, { limit: Infinity, rate: 0.30 }
+                ]
+            },
+            "2026-2027": {
+                thresholds: { general: 400000, women_senior: 450000, disabled: 525000, third_gender: 525000, war_fighter: 550000, july_warrior: 550000 },
+                slabs: [
+                    { limit: 300000, rate: 0.10 }, { limit: 400000, rate: 0.15 },
+                    { limit: 500000, rate: 0.20 }, { limit: 2000000, rate: 0.25 },
+                    { limit: Infinity, rate: 0.30 }
+                ]
+            }
+        };
+
+        const MINIMUM_TAX_CITY_CORP = 5000; // Chattogram City Corporation area
+        const bnMoney = n => "৳ " + Math.round(n).toLocaleString("bn-BD");
+
+        function updatePrintMeta() {
+            const yearSelect = document.getElementById("taxYear");
+            const categorySelect = document.getElementById("category");
+            const incomeInput = document.getElementById("annualIncome");
+            const yearText = yearSelect.options[yearSelect.selectedIndex]?.text || "";
+            const categoryText = categorySelect.options[categorySelect.selectedIndex]?.text || "";
+            const income = Math.max(0, Number(incomeInput.value) || 0);
+            document.getElementById("printMeta").innerHTML =
+                `<strong>করবর্ষ:</strong> ${yearText} &nbsp; | &nbsp; ` +
+                `<strong>করদাতার শ্রেণি:</strong> ${categoryText} &nbsp; | &nbsp; ` +
+                `<strong>বার্ষিক মোট আয়:</strong> ${bnMoney(income)}`;
+        }
+
+        function printTaxResult() {
+            calculateTax();
+            updatePrintMeta();
+            window.print();
+        }
+
+        function calculateTax() {
+            const year = document.getElementById("taxYear").value;
+            const category = document.getElementById("category").value;
+            const income = Math.max(0, Number(document.getElementById("annualIncome").value) || 0);
+            const rule = TAX_RULES[year];
+            const taxFreeLimit = rule.thresholds[category];
+            const slabsBody = document.getElementById("slabsTableBody");
+            updatePrintMeta();
+
+            if (taxFreeLimit === null || taxFreeLimit === undefined) {
+                slabsBody.innerHTML = '<tr><td colspan="3">এই করবর্ষে এই শ্রেণির জন্য নির্ধারিত করমুক্ত সীমা প্রযোজ্য নয়।</td></tr>';
+                document.getElementById("resExemption").innerText = "প্রযোজ্য নয়";
+                document.getElementById("resTaxable").innerText = bnMoney(0);
+                document.getElementById("resGrossTax").innerText = bnMoney(0);
+                document.getElementById("resMinTax").innerText = bnMoney(0);
+                document.getElementById("resNetTax").innerText = bnMoney(0);
+                return;
+            }
+
+            const taxableIncome = Math.max(0, income - taxFreeLimit);
+            let remainingIncome = taxableIncome;
+            let grossTax = 0;
+            let slabRows = `<tr><td>প্রথম ${taxFreeLimit.toLocaleString("bn-BD")} টাকা (করমুক্ত)</td><td>০%</td><td>${bnMoney(0)}</td></tr>`;
+            let lowerBound = taxFreeLimit;
+
+            rule.slabs.forEach((slab) => {
+                if (remainingIncome <= 0) return;
+                const amountInSlab = Math.min(remainingIncome, slab.limit);
+                const slabTax = amountInSlab * slab.rate;
+                const upperBound = slab.limit === Infinity ? null : lowerBound + slab.limit;
+                const rangeLabel = upperBound === null
+                    ? `${(lowerBound + 1).toLocaleString("bn-BD")} টাকার বেশি`
+                    : `${(lowerBound + 1).toLocaleString("bn-BD")} – ${upperBound.toLocaleString("bn-BD")} টাকা`;
+                slabRows += `<tr><td>${rangeLabel}<br><small>এই ধাপে আয়: ${amountInSlab.toLocaleString("bn-BD")} টাকা</small></td><td>${(slab.rate * 100).toLocaleString("bn-BD")}%</td><td>${bnMoney(slabTax)}</td></tr>`;
+                grossTax += slabTax;
+                remainingIncome -= amountInSlab;
+                if (upperBound !== null) lowerBound = upperBound;
+                else lowerBound += amountInSlab;
+            });
+
+            slabsBody.innerHTML = slabRows;
+            const netTax = income > taxFreeLimit ? Math.max(grossTax, MINIMUM_TAX_CITY_CORP) : 0;
+
+            document.getElementById("resExemption").innerText = bnMoney(taxFreeLimit);
+            document.getElementById("resTaxable").innerText = bnMoney(taxableIncome);
+            document.getElementById("resGrossTax").innerText = bnMoney(grossTax);
+            document.getElementById("resMinTax").innerText = bnMoney(income > taxFreeLimit ? MINIMUM_TAX_CITY_CORP : 0);
+            document.getElementById("resNetTax").innerText = bnMoney(netTax);
+        }
+
+        // Initialize Calculation on Load
+        window.onload = function() {
+            calculateTax();
+        };
+    </script>
+</body>
+</html>
