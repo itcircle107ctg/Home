@@ -119,36 +119,66 @@
             color: var(--accent);
         }
 
-        /* --- Section 1: Calculator --- */
+        /* --- Section 1: Calculator with Rebate --- */
         .calculator-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.15fr 0.85fr;
             gap: 2rem;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .calculator-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .form-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 550px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.92rem;
+        }
+
+        .sub-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: -2px;
+            margin-bottom: 4px;
+        }
+
+        .badge-limit {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.74rem;
+            font-weight: 600;
         }
 
         .form-control {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.65rem 0.9rem;
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
             transition: border-color 0.2s ease;
             background-color: #fff;
@@ -159,14 +189,64 @@
             box-shadow: 0 0 0 3px rgba(0, 106, 78, 0.15);
         }
 
+        .sub-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .sub-card-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.85rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+            background: #fff;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .checkbox-group input {
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .btn-group-calc {
+            display: flex;
+            gap: 0.85rem;
+        }
+
         .btn-calc {
-            width: 100%;
+            flex: 2;
             background-color: var(--primary);
             color: white;
             border: none;
             padding: 0.85rem;
             border-radius: 8px;
-            font-size: 1.05rem;
+            font-size: 1.02rem;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s ease;
@@ -176,40 +256,98 @@
             background-color: var(--primary-dark);
         }
 
+        .btn-reset {
+            flex: 1;
+            background-color: #e2e8f0;
+            color: var(--text-main);
+            border: none;
+            padding: 0.85rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-reset:hover {
+            background-color: #cbd5e1;
+        }
+
         .calc-result {
             background-color: var(--bg-light);
             border-radius: var(--radius);
-            padding: 1.5rem;
+            padding: 1.4rem;
             border: 1px solid var(--border);
+            height: fit-content;
         }
 
         .result-item {
             display: flex;
             justify-content: space-between;
-            padding: 0.6rem 0;
+            padding: 0.5rem 0;
             border-bottom: 1px dashed var(--border);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            gap: 0.5rem;
+        }
+
+        .result-item strong {
+            white-space: nowrap;
+        }
+
+        .result-item.highlight-rebate {
+            background-color: #ecfdf5;
+            padding: 0.55rem 0.6rem;
+            border-radius: 6px;
+            color: var(--primary-dark);
+            border-bottom: 1px solid #a7f3d0;
+            margin: 0.25rem 0;
         }
 
         .result-item.total {
             border-bottom: none;
             border-top: 2px solid var(--primary);
             margin-top: 0.5rem;
-            padding-top: 1rem;
+            padding-top: 0.85rem;
             font-weight: 700;
-            font-size: 1.15rem;
+            font-size: 1.12rem;
             color: var(--primary-dark);
+        }
+
+        .rebate-breakdown-box {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem;
+            margin: 0.85rem 0;
+            font-size: 0.85rem;
+        }
+
+        .rebate-breakdown-box h5 {
+            color: var(--primary);
+            margin-bottom: 0.45rem;
+            font-size: 0.9rem;
+        }
+
+        .rebate-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+            border-bottom: 1px dotted #e2e8f0;
+        }
+
+        .rebate-row:last-child {
+            border-bottom: none;
         }
 
         .slabs-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            margin-top: 0.75rem;
+            font-size: 0.86rem;
         }
 
         .slabs-table th, .slabs-table td {
-            padding: 0.6rem 0.8rem;
+            padding: 0.55rem 0.7rem;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
@@ -434,16 +572,16 @@
         }
 
         .print-document-heading { display: none; }
-        .print-meta { color: var(--text-muted); font-size: .9rem; margin-bottom: .75rem; }
-        .result-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .print-meta { color: var(--text-muted); font-size: .88rem; margin-bottom: .75rem; line-height: 1.5; }
+        .result-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
         .btn-print {
-            border: 0; border-radius: 8px; padding: .65rem 1rem; cursor: pointer;
-            color: #fff; background: #2563eb; font-weight: 600;
+            border: 0; border-radius: 8px; padding: .6rem .95rem; cursor: pointer;
+            color: #fff; background: #2563eb; font-weight: 600; font-size: 0.9rem;
             transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
             white-space: nowrap;
         }
         .btn-print:hover { background: #1d4ed8; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(37,99,235,.22); }
-        @page { size: A4 portrait; margin: 15mm; }
+        @page { size: A4 portrait; margin: 12mm; }
         @media print {
             html, body { background: #fff !important; width: 100% !important; }
             body * { visibility: hidden !important; }
@@ -453,23 +591,26 @@
                 width: 100% !important; margin: 0 !important; padding: 0 !important;
                 border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
                 background: #fff !important; color: #111 !important;
-                font-size: 11pt !important;
+                font-size: 10pt !important;
             }
             #taxResultPrintArea .print-document-heading {
-                display: block !important; text-align: center; margin-bottom: 18px;
-                padding-bottom: 10px; border-bottom: 1.5px solid #333;
+                display: block !important; text-align: center; margin-bottom: 14px;
+                padding-bottom: 8px; border-bottom: 1.5px solid #333;
             }
-            #taxResultPrintArea .print-document-heading h2 { margin: 0 0 4px; font-size: 17pt; }
-            #taxResultPrintArea .print-document-heading h3 { margin: 0 0 7px; font-size: 13pt; }
-            #taxResultPrintArea .print-document-heading p { margin: 0; font-size: 12pt; font-weight: 700; }
+            #taxResultPrintArea .print-document-heading h2 { margin: 0 0 3px; font-size: 16pt; }
+            #taxResultPrintArea .print-document-heading h3 { margin: 0 0 5px; font-size: 12.5pt; }
+            #taxResultPrintArea .print-document-heading p { margin: 0; font-size: 11.5pt; font-weight: 700; }
             #taxResultPrintArea .result-toolbar { display: block !important; }
             #taxResultPrintArea .btn-print { display: none !important; }
-            #taxResultPrintArea .result-item { color: #111 !important; border-color: #aaa !important; }
+            #taxResultPrintArea .result-item { color: #111 !important; border-color: #aaa !important; padding: 4px 0 !important; }
+            #taxResultPrintArea .result-item.highlight-rebate { background: #f3f4f6 !important; color: #111 !important; border: 1px solid #999 !important; }
             #taxResultPrintArea .result-item.total { color: #111 !important; border-top: 2px solid #333 !important; }
-            #taxResultPrintArea .slabs-table { width: 100% !important; font-size: 10pt !important; page-break-inside: avoid; }
+            #taxResultPrintArea .rebate-breakdown-box { border: 1px solid #777 !important; background: #fff !important; padding: 6px 8px !important; }
+            #taxResultPrintArea .rebate-breakdown-box h5 { color: #111 !important; }
+            #taxResultPrintArea .slabs-table { width: 100% !important; font-size: 9.5pt !important; page-break-inside: avoid; }
             #taxResultPrintArea .slabs-table th, #taxResultPrintArea .slabs-table td {
                 color: #111 !important; background: #fff !important; border: 1px solid #777 !important;
-                padding: 7px !important;
+                padding: 5px 6px !important;
             }
             #taxResultPrintArea h5 { color: #111 !important; }
             #taxResultPrintArea small { color: #333 !important; }
@@ -499,45 +640,133 @@
 
     <div class="main-container">
         
-        <!-- SECTION 1: Tax Slabs & Calculator -->
+        <!-- SECTION 1: Tax Slabs & Rebate Calculator -->
         <section id="calculator-section">
             <div class="section-title">
                 <i class="fa-solid fa-calculator"></i>
-                আয়কর স্ল্যাব ও অটো ক্যালকুলেটর
+                আয়কর স্ল্যাব ও বিনিয়োগজনিত কর রেয়াত ক্যালকুলেটর (২০২৩–২৪ হতে ২০২৬–২৭ করবর্ষ)
             </div>
             
             <div class="calculator-grid">
                 <!-- Inputs Panel -->
                 <div class="calc-inputs">
-                    <div class="form-group">
-                        <label for="taxYear"><i class="fa-solid fa-calendar-days"></i> কর বর্ষ (Assessment Year)</label>
-                        <select id="taxYear" class="form-control" onchange="calculateTax()">
-                            <option value="2026-2027" selected>২০২৬–২০২৭ করবর্ষ</option>
-                            <option value="2025-2026">২০২৫–২০২৬ করবর্ষ</option>
-                            <option value="2024-2025">২০২৪–২০২৫ করবর্ষ</option>
-                            <option value="2023-2024">২০২৩–২০২৪ করবর্ষ</option>
-                            <option value="2022-2023">২০২২–২০২৩ করবর্ষ</option>
-                        </select>
+                    <div class="sub-card">
+                        <div class="sub-card-title"><i class="fa-solid fa-user-check"></i> ১. করদাতার তথ্য ও করযোগ্য আয়</div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="taxYear"><i class="fa-solid fa-calendar-days"></i> কর বর্ষ (Assessment Year)</label>
+                                <select id="taxYear" class="form-control" onchange="calculateTax()">
+                                    <option value="2026-2027" selected>২০২৬–২০২৭ করবর্ষ</option>
+                                    <option value="2025-2026">২০২৫–২০২৬ করবর্ষ</option>
+                                    <option value="2024-2025">২০২৪–২০২৫ করবর্ষ</option>
+                                    <option value="2023-2024">২০২৩–২০২৪ করবর্ষ</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="category"><i class="fa-solid fa-user-tag"></i> করদাতার শ্রেণী</label>
+                                <select id="category" class="form-control" onchange="calculateTax()">
+                                    <option value="general">সাধারণ করদাতা</option>
+                                    <option value="women_senior">নারী ও ৬৫ বছর বা তদূর্ধ্ব জ্যেষ্ঠ নাগরিক</option>
+                                    <option value="disabled">শারীরিক প্রতিবন্ধী করদাতা</option>
+                                    <option value="third_gender">তৃতীয় লিঙ্গের করদাতা</option>
+                                    <option value="war_fighter">গেজেটভুক্ত যুদ্ধাহত মুক্তিযোদ্ধা</option>
+                                    <option value="july_warrior">গেজেটভুক্ত জুলাই যোদ্ধা (২০২৬–২৭ থেকে)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="disabledDependents">প্রতিবন্ধী সন্তান/পোষ্যের সংখ্যা</label>
+                                <span class="sub-label">প্রতিজনের জন্য ৫০,০০০ ৳ অতিরিক্ত করমুক্ত সীমা</span>
+                                <input type="number" id="disabledDependents" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="annualIncome">নিয়মিত করযোগ্য মোট আয় (৳)</label>
+                                <span class="sub-label">কর অব্যাহতিপ্রাপ্ত ও চূড়ান্ত করদায়ের আয় বাদে ('ক')</span>
+                                <input type="number" id="annualIncome" class="form-control" min="0" placeholder="যেমন: ৬০০০০০" value="600000" oninput="calculateTax()">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0.6rem;">
+                            <label for="tdsAmount">উৎসে কর্তিত / অগ্রিম পরিশোধিত কর (৳)</label>
+                            <span class="sub-label">বেতন, ব্যাংক সুদ বা সঞ্চয়পত্র থেকে কর্তিত বা অগ্রিম কর</span>
+                            <input type="number" id="tdsAmount" class="form-control" min="0" value="0" oninput="calculateTax()">
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="isNewTaxpayer" onchange="calculateTax()">
+                            <label for="isNewTaxpayer">নতুন করদাতা (ন্যূনতম কর ১,০০০ ৳ প্রযোজ্য হবে; অন্যথায় সিটি কর্পোরেশন এলাকায় ৫,০০০ ৳)</label>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="category"><i class="fa-solid fa-user-tag"></i> করদাতার শ্রেণী</label>
-                        <select id="category" class="form-control" onchange="calculateTax()">
-                            <option value="general">সাধারণ করদাতা</option>
-                            <option value="women_senior">নারী ও ৬৫ বছর বা তদূর্ধ্ব জ্যেষ্ঠ নাগরিক</option>
-                            <option value="disabled">শারীরিক প্রতিবন্ধী করদাতা</option>
-                            <option value="third_gender">তৃতীয় লিঙ্গের করদাতা</option>
-                            <option value="war_fighter">গেজেটভুক্ত যুদ্ধাহত মুক্তিযোদ্ধা</option>
-                            <option value="july_warrior">গেজেটভুক্ত জুলাই যোদ্ধা (২০২৬–২৭ থেকে)</option>
-                        </select>
+                    <div class="sub-card">
+                        <div class="sub-card-title"><i class="fa-solid fa-coins"></i> ২. কর রেয়াতযোগ্য বিনিয়োগ ও দান (ধারা ৭৮)</div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="invSanchayapatra">সরকারি সিকিউরিটিজ / সঞ্চয়পত্র (৳)</label>
+                                <span class="sub-label"><span class="badge-limit">সর্বোচ্চ অনুমোদিত সীমা: ৫,০০,০০০ ৳</span></span>
+                                <input type="number" id="invSanchayapatra" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="invDps">ডিপোজিট পেনশন স্কিম / DPS (৳)</label>
+                                <span class="sub-label"><span class="badge-limit">সর্বোচ্চ অনুমোদিত সীমা: ১,২০,০০০ ৳</span></span>
+                                <input type="number" id="invDps" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="invLifeInsurance">জীবন বিমা পলিসির প্রিমিয়াম (৳)</label>
+                                <span class="sub-label">বার্ষিক পরিশোধিত প্রিমিয়াম</span>
+                                <input type="number" id="invLifeInsurance" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="invProvidentFund">ভবিষ্য তহবিলে (PF) চাঁদা (৳)</label>
+                                <span class="sub-label">সরকারি কর্মচারীর নিজ ও বেসরকারিতে উভয়ের চাঁদা</span>
+                                <input type="number" id="invProvidentFund" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="invShareMutual">শেয়ার, মিউচুয়াল ফান্ড / ETF (৳)</label>
+                                <span class="sub-label">তালিকাভুক্ত সিকিউরিটিজ বা ইউনিট সার্টিফিকেট</span>
+                                <input type="number" id="invShareMutual" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="invWelfareGroup">কল্যাণ তহবিল ও গোষ্ঠী বিমা (৳)</label>
+                                <span class="sub-label">বেতন হতে কর্তিত বা প্রদত্ত চাঁদা</span>
+                                <input type="number" id="invWelfareGroup" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="invPensionScheme">সর্বজনীন পেনশন স্কিমে চাঁদা (৳)</label>
+                                <span class="sub-label">প্রদেয় যেকোনো পরিমাণ চাঁদা</span>
+                                <input type="number" id="invPensionScheme" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label for="invZakatDonation">যাকাত তহবিল ও অনুমোদিত দান (৳)</label>
+                                <span class="sub-label">সরকারি যাকাত ফান্ড, CRP, icddr,b ইত্যাদি</span>
+                                <input type="number" id="invZakatDonation" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="annualIncome"><i class="fa-solid fa-money-bill-wave"></i> মোট বাৎসরিক আয় (টাকা)</label>
-                        <input type="number" id="annualIncome" class="form-control" placeholder="যেমন: ৬০০০০০" value="600000" oninput="calculateTax()">
+                    <div class="btn-group-calc">
+                        <button type="button" class="btn-calc" onclick="calculateTax()"><i class="fa-solid fa-rotate"></i> কর ও রেয়াত হিসাব করুন</button>
+                        <button type="button" class="btn-reset" onclick="resetForm()"><i class="fa-solid fa-arrow-rotate-left"></i> রিসেট</button>
                     </div>
-
-                    <button class="btn-calc" onclick="calculateTax()"><i class="fa-solid fa-rotate"></i> কর হিসাব পুনঃগণনা করুন</button>
                 </div>
 
                 <!-- Output Panel -->
@@ -545,11 +774,11 @@
                     <div class="print-document-heading">
                         <h2>জাতীয় রাজস্ব বোর্ড</h2>
                         <h3>আয়কর বিভাগ</h3>
-                        <p>আয়কর হিসাবের বিবরণী</p>
+                        <p>আয়কর ও বিনিয়োগজনিত কর রেয়াত হিসাবের বিবরণী</p>
                     </div>
                     <div id="printMeta" class="print-meta"></div>
                     <div class="result-toolbar">
-                        <h4 style="margin-bottom: 1rem; color: var(--text-main); font-size: 1.1rem;">কর হিসাবের সংক্ষিপ্ত বিবরণী</h4>
+                        <h4 style="color: var(--text-main); font-size: 1.08rem;">কর ও রেয়াত হিসাবের বিবরণী</h4>
                         <button type="button" class="btn-print" onclick="printTaxResult()"><i class="fa-solid fa-print"></i> Print / Save as PDF</button>
                     </div>
                     <div class="result-item">
@@ -557,24 +786,61 @@
                         <strong id="resExemption">৳ ০</strong>
                     </div>
                     <div class="result-item">
-                        <span>করযোগ্য মোট আয়:</span>
+                        <span>করযোগ্য মোট আয় ('ক'):</span>
+                        <strong id="resTotalIncome">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>করমুক্ত সীমা পরবর্তী করযোগ্য আয়:</span>
                         <strong id="resTaxable">৳ ০</strong>
                     </div>
                     <div class="result-item">
-                        <span>গণনাকৃত মোট কর:</span>
+                        <span>রেয়াত পূর্ববর্তী মোট কর (গ্রস করদায়):</span>
                         <strong id="resGrossTax">৳ ০</strong>
                     </div>
                     <div class="result-item">
-                        <span>সর্বনিম্ন কর (সিটি কর্পোরেশন এলাকা):</span>
-                        <strong id="resMinTax">৳ ৫,০০০</strong>
+                        <span>মোট প্রকৃত বিনিয়োগ / অনুমোদনযোগ্য বিনিয়োগ ('খ'):</span>
+                        <strong id="resInvestments">৳ ০ / ৳ ০</strong>
+                    </div>
+
+                    <div class="rebate-breakdown-box">
+                        <h5>বিনিয়োগজনিত কর রেয়াত নির্ণয় (ধারা ৭৮):</h5>
+                        <div class="rebate-row">
+                            <span>(ক) মোট আয়ের ৩% (০.০৩ × ক):</span>
+                            <strong id="rebateOptA">৳ ০</strong>
+                        </div>
+                        <div class="rebate-row">
+                            <span>(খ) অনুমোদনযোগ্য বিনিয়োগের ১০% (০.১০ × খ):</span>
+                            <strong id="rebateOptB">৳ ০</strong>
+                        </div>
+                        <div class="rebate-row">
+                            <span>(গ) সর্বোচ্চ অনুমোদিত সীমা (২০২৩–২৪ থেকে প্রযোজ্য):</span>
+                            <strong id="rebateOptC">৳ ১০,০০,০০০</strong>
+                        </div>
+                    </div>
+
+                    <div class="result-item highlight-rebate">
+                        <span>প্রাপ্য কর রেয়াত (ক, খ ও গ এর মধ্যে সবচেয়ে কম):</span>
+                        <strong id="resRebate">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>রেয়াত পরবর্তী করদায়:</span>
+                        <strong id="resTaxAfterRebate">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>সর্বনিম্ন কর বিবেচনায় প্রদেয় কর:</span>
+                        <strong id="resTaxWithMin">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>বাদ: উৎসে কর্তিত / অগ্রিম পরিশোধিত কর:</span>
+                        <strong id="resTds">৳ ০</strong>
                     </div>
                     <div class="result-item total">
-                        <span>প্রদেয় নিট আয়কর:</span>
+                        <span>ধারা ১৭৩ অনুযায়ী নিট প্রদেয় কর:</span>
                         <strong id="resNetTax">৳ ০</strong>
                     </div>
 
                     <!-- Applicable Slabs Table -->
-                    <h5 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.95rem;">প্রযোজ্য আয়কর স্ল্যাবসমূহ</h5>
+                    <h5 style="margin-top: 1.25rem; margin-bottom: 0.4rem; color: var(--text-muted); font-size: 0.92rem;">প্রযোজ্য আয়কর স্ল্যাবসমূহ</h5>
                     <table class="slabs-table">
                         <thead>
                             <tr>
@@ -590,7 +856,7 @@
                 </div>
             </div>
             <p style="margin-top:1rem;color:var(--text-muted);font-size:.86rem">
-                নোট: ২০২৬–২৭ করবর্ষের স্ল্যাব ও বিশেষ শ্রেণির করমুক্ত সীমা প্রদত্ত পরিপত্রের ছক অনুযায়ী। এটি ব্যক্তিশ্রেণির সাধারণ স্ল্যাবভিত্তিক আনুমানিক হিসাব; বিনিয়োগ রেয়াত, উৎসে কর, সারচার্জ, বিশেষ আয় ও অন্যান্য সমন্বয় এতে অন্তর্ভুক্ত নয়।
+                নোট: আয়কর আইন, ২০২৩ কার্যকর হওয়ার পর ২০২৩–২৪ করবর্ষ থেকে ২০২৬–২৭ করবর্ষ পর্যন্ত প্রযোজ্য স্ল্যাব, করমুক্ত সীমা এবং ধারা ৭৮ ও ষষ্ঠ তফসিল অংশ ৩ অনুযায়ী বিনিয়োগজনিত কর রেয়াত (সঞ্চয়পত্র সর্বোচ্চ ৫ লক্ষ টাকা ও ডিপিএস সর্বোচ্চ ১.২০ লক্ষ টাকা সীমাসহ) এই ক্যালকুলেটরে অন্তর্ভুক্ত করা হয়েছে।
             </p>
         </section>
 
@@ -676,30 +942,25 @@
             </div>
         </section>
 
+    </div>
+
     <footer>
         <p>© সার্কেল-১০৭, কর অঞ্চল-৫, চট্টগ্রাম | জাতীয় রাজস্ব বোর্ড (এনবিআর), গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</p>
     </footer>
 
     <!-- JavaScript logic -->
     <script>
-        // Individual taxpayer slab data: tax years 2022-23 to 2026-27.
+        // Individual taxpayer slab & rebate data: tax years 2023-24 to 2026-27 (Income Tax Act, 2023).
         // Slab limits are incremental amounts above the applicable tax-free threshold.
         const TAX_RULES = {
-            "2022-2023": {
-                thresholds: { general: 300000, women_senior: 350000, disabled: 450000, third_gender: 350000, war_fighter: 475000, july_warrior: null },
-                slabs: [
-                    { limit: 100000, rate: 0.05 }, { limit: 300000, rate: 0.10 },
-                    { limit: 400000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
-                    { limit: Infinity, rate: 0.25 }
-                ]
-            },
             "2023-2024": {
                 thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 400000, war_fighter: 500000, july_warrior: null },
                 slabs: [
                     { limit: 100000, rate: 0.05 }, { limit: 300000, rate: 0.10 },
                     { limit: 400000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
                     { limit: Infinity, rate: 0.25 }
-                ]
+                ],
+                rebate: { incomeRate: 0.03, invRate: 0.15, maxCap: 1000000 }
             },
             "2024-2025": {
                 thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 475000, war_fighter: 500000, july_warrior: null },
@@ -707,7 +968,8 @@
                     { limit: 100000, rate: 0.05 }, { limit: 400000, rate: 0.10 },
                     { limit: 500000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
                     { limit: 2000000, rate: 0.25 }, { limit: Infinity, rate: 0.30 }
-                ]
+                ],
+                rebate: { incomeRate: 0.03, invRate: 0.15, maxCap: 1000000 }
             },
             "2025-2026": {
                 thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 475000, war_fighter: 500000, july_warrior: null },
@@ -715,7 +977,8 @@
                     { limit: 100000, rate: 0.05 }, { limit: 400000, rate: 0.10 },
                     { limit: 500000, rate: 0.15 }, { limit: 500000, rate: 0.20 },
                     { limit: 2000000, rate: 0.25 }, { limit: Infinity, rate: 0.30 }
-                ]
+                ],
+                rebate: { incomeRate: 0.03, invRate: 0.15, maxCap: 1000000 }
             },
             "2026-2027": {
                 thresholds: { general: 400000, women_senior: 450000, disabled: 525000, third_gender: 525000, war_fighter: 550000, july_warrior: 550000 },
@@ -723,20 +986,25 @@
                     { limit: 300000, rate: 0.10 }, { limit: 400000, rate: 0.15 },
                     { limit: 500000, rate: 0.20 }, { limit: 2000000, rate: 0.25 },
                     { limit: Infinity, rate: 0.30 }
-                ]
+                ],
+                rebate: { incomeRate: 0.03, invRate: 0.10, maxCap: 750000 }
             }
         };
 
         const MINIMUM_TAX_CITY_CORP = 5000; // Chattogram City Corporation area
         const bnMoney = n => "৳ " + Math.round(n).toLocaleString("bn-BD");
 
+        function getNumVal(id) {
+            const val = parseFloat(document.getElementById(id).value);
+            return isNaN(val) || val < 0 ? 0 : val;
+        }
+
         function updatePrintMeta() {
             const yearSelect = document.getElementById("taxYear");
             const categorySelect = document.getElementById("category");
-            const incomeInput = document.getElementById("annualIncome");
+            const income = getNumVal("annualIncome");
             const yearText = yearSelect.options[yearSelect.selectedIndex]?.text || "";
             const categoryText = categorySelect.options[categorySelect.selectedIndex]?.text || "";
-            const income = Math.max(0, Number(incomeInput.value) || 0);
             document.getElementById("printMeta").innerHTML =
                 `<strong>করবর্ষ:</strong> ${yearText} &nbsp; | &nbsp; ` +
                 `<strong>করদাতার শ্রেণি:</strong> ${categoryText} &nbsp; | &nbsp; ` +
@@ -752,22 +1020,43 @@
         function calculateTax() {
             const year = document.getElementById("taxYear").value;
             const category = document.getElementById("category").value;
-            const income = Math.max(0, Number(document.getElementById("annualIncome").value) || 0);
+            const disabledCount = getNumVal("disabledDependents");
+            const income = getNumVal("annualIncome");
+            const tdsAmount = getNumVal("tdsAmount");
+            const isNewTaxpayer = document.getElementById("isNewTaxpayer").checked;
+            const minTax = isNewTaxpayer ? 1000 : MINIMUM_TAX_CITY_CORP;
+
             const rule = TAX_RULES[year];
-            const taxFreeLimit = rule.thresholds[category];
+            const baseThreshold = rule.thresholds[category];
             const slabsBody = document.getElementById("slabsTableBody");
             updatePrintMeta();
 
-            if (taxFreeLimit === null || taxFreeLimit === undefined) {
+            // Update dynamic rebate labels per tax year
+            const invPctText = Math.round(rule.rebate.invRate * 100).toLocaleString("bn-BD");
+            document.querySelector("#rebateOptB").previousElementSibling.innerText =
+                `(খ) অনুমোদনযোগ্য বিনিয়োগের ${invPctText}% (০.${Math.round(rule.rebate.invRate * 100)} × খ):`;
+            document.querySelector("#rebateOptC").previousElementSibling.innerText =
+                `(গ) সর্বোচ্চ অনুমোদিত সীমা:`;
+            document.getElementById("rebateOptC").innerText = bnMoney(rule.rebate.maxCap);
+
+            if (baseThreshold === null || baseThreshold === undefined) {
                 slabsBody.innerHTML = '<tr><td colspan="3">এই করবর্ষে এই শ্রেণির জন্য নির্ধারিত করমুক্ত সীমা প্রযোজ্য নয়।</td></tr>';
                 document.getElementById("resExemption").innerText = "প্রযোজ্য নয়";
+                document.getElementById("resTotalIncome").innerText = bnMoney(income);
                 document.getElementById("resTaxable").innerText = bnMoney(0);
                 document.getElementById("resGrossTax").innerText = bnMoney(0);
-                document.getElementById("resMinTax").innerText = bnMoney(0);
+                document.getElementById("resInvestments").innerText = "৳ ০ / ৳ ০";
+                document.getElementById("rebateOptA").innerText = bnMoney(0);
+                document.getElementById("rebateOptB").innerText = bnMoney(0);
+                document.getElementById("resRebate").innerText = bnMoney(0);
+                document.getElementById("resTaxAfterRebate").innerText = bnMoney(0);
+                document.getElementById("resTaxWithMin").innerText = bnMoney(0);
+                document.getElementById("resTds").innerText = bnMoney(tdsAmount);
                 document.getElementById("resNetTax").innerText = bnMoney(0);
                 return;
             }
 
+            const taxFreeLimit = baseThreshold + (disabledCount * 50000);
             const taxableIncome = Math.max(0, income - taxFreeLimit);
             let remainingIncome = taxableIncome;
             let grossTax = 0;
@@ -790,13 +1079,69 @@
             });
 
             slabsBody.innerHTML = slabRows;
-            const netTax = income > taxFreeLimit ? Math.max(grossTax, MINIMUM_TAX_CITY_CORP) : 0;
 
+            // Investment & Allowable Limits (Section 78 & 6th Schedule Part 3)
+            const rawSanchayapatra = getNumVal("invSanchayapatra");
+            const rawDps = getNumVal("invDps");
+            const lifeInsurance = getNumVal("invLifeInsurance");
+            const providentFund = getNumVal("invProvidentFund");
+            const shareMutual = getNumVal("invShareMutual");
+            const welfareGroup = getNumVal("invWelfareGroup");
+            const pensionScheme = getNumVal("invPensionScheme");
+            const zakatDonation = getNumVal("invZakatDonation");
+
+            const actualTotalInv = rawSanchayapatra + rawDps + lifeInsurance + providentFund + shareMutual + welfareGroup + pensionScheme + zakatDonation;
+            const allowableSanchayapatra = Math.min(rawSanchayapatra, 500000);
+            const allowableDps = Math.min(rawDps, 120000);
+            const allowableTotalInv = allowableSanchayapatra + allowableDps + lifeInsurance + providentFund + shareMutual + welfareGroup + pensionScheme + zakatDonation;
+
+            // Tax Rebate Calculation (Section 78)
+            const rebateOptA = income * rule.rebate.incomeRate;
+            const rebateOptB = allowableTotalInv * rule.rebate.invRate;
+            const rebateOptC = rule.rebate.maxCap;
+
+            let eligibleRebate = 0;
+            if (grossTax > 0) {
+                eligibleRebate = Math.min(rebateOptA, rebateOptB, rebateOptC);
+            }
+
+            const taxAfterRebate = Math.max(0, grossTax - eligibleRebate);
+            const taxWithMinimum = income > taxFreeLimit ? Math.max(taxAfterRebate, minTax) : 0;
+            const netPayable = Math.max(0, taxWithMinimum - tdsAmount);
+
+            // Update UI
             document.getElementById("resExemption").innerText = bnMoney(taxFreeLimit);
+            document.getElementById("resTotalIncome").innerText = bnMoney(income);
             document.getElementById("resTaxable").innerText = bnMoney(taxableIncome);
             document.getElementById("resGrossTax").innerText = bnMoney(grossTax);
-            document.getElementById("resMinTax").innerText = bnMoney(income > taxFreeLimit ? MINIMUM_TAX_CITY_CORP : 0);
-            document.getElementById("resNetTax").innerText = bnMoney(netTax);
+            document.getElementById("resInvestments").innerText = `${bnMoney(actualTotalInv)} / ${bnMoney(allowableTotalInv)}`;
+            document.getElementById("rebateOptA").innerText = bnMoney(rebateOptA);
+            document.getElementById("rebateOptB").innerText = bnMoney(rebateOptB);
+            document.getElementById("resRebate").innerText = bnMoney(eligibleRebate);
+            document.getElementById("resTaxAfterRebate").innerText = bnMoney(taxAfterRebate);
+            document.getElementById("resTaxWithMin").innerText = bnMoney(taxWithMinimum);
+            document.getElementById("resTds").innerText = bnMoney(tdsAmount);
+            document.getElementById("resNetTax").innerText = bnMoney(netPayable);
+        }
+
+        function resetForm() {
+            document.getElementById("taxYear").value = "2026-2027";
+            document.getElementById("category").value = "general";
+            document.getElementById("disabledDependents").value = 0;
+            document.getElementById("annualIncome").value = "";
+            document.getElementById("tdsAmount").value = 0;
+            document.getElementById("isNewTaxpayer").checked = false;
+
+            document.getElementById("invSanchayapatra").value = 0;
+            document.getElementById("invDps").value = 0;
+            document.getElementById("invLifeInsurance").value = 0;
+            document.getElementById("invProvidentFund").value = 0;
+            document.getElementById("invShareMutual").value = 0;
+            document.getElementById("invWelfareGroup").value = 0;
+            document.getElementById("invPensionScheme").value = 0;
+            document.getElementById("invZakatDonation").value = 0;
+
+            calculateTax();
         }
 
         // Initialize Calculation on Load
