@@ -895,6 +895,37 @@
                         <span>রেয়াত পূর্ববর্তী মোট কর (গ্রস করদায়):</span>
                         <strong id="resGrossTax">৳ ০</strong>
                     </div>
+
+                    <!-- Surcharge Checkbox & Dropdown Section (Moved right below Gross Tax) -->
+                    <div class="surcharge-panel">
+                        <label class="surcharge-check-row" for="surchargeCheckbox">
+                            <input type="checkbox" id="surchargeCheckbox" onchange="toggleSurcharge()">
+                            <span>সারচার্জ প্রযোজ্য হলে টিক দিন</span>
+                        </label>
+
+                        <div class="surcharge-dropdown-wrap" id="surchargeDropdownWrap">
+                            <label for="surchargeCondition">নিট পরিসম্পদের পরিমাণ / শর্ত নির্বাচন করুন:</label>
+                            <select id="surchargeCondition" onchange="calculateTax()">
+                                <option value="0">৪ (চার) কোটি টাকা পর্যন্ত — শূন্য (০%)</option>
+                                <option value="0.10">৪ কোটি টাকার অধিক কিন্তু ১০ কোটি টাকার অধিক নয়; অথবা নিজ নামে একের অধিক মোটর গাড়ি থাকলে; অথবা মোট ৮,০০০ বর্গফুটের অধিক আয়তনের গৃহ-সম্পত্তি থাকলে — ১০%</option>
+                                <option value="0.20">১০ কোটি টাকার অধিক কিন্তু ২০ কোটি টাকার অধিক নয় — ২০%</option>
+                                <option value="0.30">২০ কোটি টাকার অধিক কিন্তু ৫০ কোটি টাকার অধিক নয় — ৩০%</option>
+                                <option value="0.35">৫০ (পঞ্চাশ) কোটি টাকার অধিক — ৩৫%</option>
+                            </select>
+
+                            <div class="surcharge-amount-row">
+                                <span>সারচার্জের পরিমাণ (<span id="surchargeRateText">০%</span>):</span>
+                                <strong id="resSurcharge">৳ ০</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gross Tax + Surcharge Item -->
+                    <div class="result-item">
+                        <span>গ্রস করদায় + সারচার্জ (মোট):</span>
+                        <strong id="resGrossPlusSurcharge">৳ ০</strong>
+                    </div>
+
                     <div class="result-item">
                         <span>মোট প্রকৃত বিনিয়োগ / অনুমোদনযোগ্য বিনিয়োগ ('খ'):</span>
                         <strong id="resInvestments">৳ ০ / ৳ ০</strong>
@@ -939,36 +970,6 @@
                     <div class="result-item">
                         <span>বাদ: রিটার্নের সাথে পরিশোধিত কর (১৭৩ ধারা):</span>
                         <strong id="resReturnTax173">৳ ০</strong>
-                    </div>
-
-                    <!-- Payable Tax (titled simply "প্রদেয় কর") -->
-                    <div class="result-item payable-tax">
-                        <span>প্রদেয় কর:</span>
-                        <strong id="resPayableTax">৳ ০</strong>
-                    </div>
-
-                    <!-- Surcharge Checkbox & Dropdown Section -->
-                    <div class="surcharge-panel">
-                        <label class="surcharge-check-row" for="surchargeCheckbox">
-                            <input type="checkbox" id="surchargeCheckbox" onchange="toggleSurcharge()">
-                            <span>সারচার্জ প্রযোজ্য হলে টিক দিন</span>
-                        </label>
-
-                        <div class="surcharge-dropdown-wrap" id="surchargeDropdownWrap">
-                            <label for="surchargeCondition">নিট পরিসম্পদের পরিমাণ / শর্ত নির্বাচন করুন:</label>
-                            <select id="surchargeCondition" onchange="calculateTax()">
-                                <option value="0">৪ (চার) কোটি টাকা পর্যন্ত — শূন্য (০%)</option>
-                                <option value="0.10">৪ কোটি টাকার অধিক কিন্তু ১০ কোটি টাকার অধিক নয়; অথবা নিজ নামে একের অধিক মোটর গাড়ি থাকলে; অথবা মোট ৮,০০০ বর্গফুটের অধিক আয়তনের গৃহ-সম্পত্তি থাকলে — ১০%</option>
-                                <option value="0.20">১০ কোটি টাকার অধিক কিন্তু ২০ কোটি টাকার অধিক নয় — ২০%</option>
-                                <option value="0.30">২০ কোটি টাকার অধিক কিন্তু ৫০ কোটি টাকার অধিক নয় — ৩০%</option>
-                                <option value="0.35">৫০ (পঞ্চাশ) কোটি টাকার অধিক — ৩৫%</option>
-                            </select>
-
-                            <div class="surcharge-amount-row">
-                                <span>সারচার্জের পরিমাণ (<span id="surchargeRateText">০%</span>):</span>
-                                <strong id="resSurcharge">৳ ০</strong>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Total Payable Tax including Surcharge -->
@@ -1089,7 +1090,6 @@
     <!-- JavaScript logic -->
     <script>
         // Individual taxpayer slab & rebate data: tax years 2023-24 to 2026-27 (Income Tax Act, 2023).
-        // Slab limits are incremental amounts above the applicable tax-free threshold.
         const TAX_RULES = {
             "2023-2024": {
                 thresholds: { general: 350000, women_senior: 400000, disabled: 475000, third_gender: 400000, war_fighter: 500000, july_warrior: null },
@@ -1196,6 +1196,9 @@
                 document.getElementById("resTotalIncome").innerText = bnMoney(income);
                 document.getElementById("resTaxable").innerText = bnMoney(0);
                 document.getElementById("resGrossTax").innerText = bnMoney(0);
+                document.getElementById("surchargeRateText").innerText = "০%";
+                document.getElementById("resSurcharge").innerText = bnMoney(0);
+                document.getElementById("resGrossPlusSurcharge").innerText = bnMoney(0);
                 document.getElementById("resInvestments").innerText = "৳ ০ / ৳ ০";
                 document.getElementById("rebateOptA").innerText = bnMoney(0);
                 document.getElementById("rebateOptB").innerText = bnMoney(0);
@@ -1205,9 +1208,6 @@
                 document.getElementById("resTds").innerText = bnMoney(tdsAmount);
                 document.getElementById("resAdvanceTax").innerText = bnMoney(advanceTaxAmount);
                 document.getElementById("resReturnTax173").innerText = bnMoney(returnTax173Amount);
-                document.getElementById("resPayableTax").innerText = bnMoney(0);
-                document.getElementById("surchargeRateText").innerText = "০%";
-                document.getElementById("resSurcharge").innerText = bnMoney(0);
                 document.getElementById("resTotalPayableWithSurcharge").innerText = bnMoney(0);
                 return;
             }
@@ -1236,6 +1236,12 @@
 
             slabsBody.innerHTML = slabRows;
 
+            // Surcharge Calculation on Gross Tax ("গ্রস করদায়ের ওপর")
+            const isSurchargeChecked = document.getElementById("surchargeCheckbox").checked;
+            const surchargeRate = isSurchargeChecked ? parseFloat(document.getElementById("surchargeCondition").value) || 0 : 0;
+            const surchargeAmount = grossTax * surchargeRate;
+            const grossPlusSurcharge = grossTax + surchargeAmount;
+
             // Investment & Allowable Limits (Section 78 & 6th Schedule Part 3)
             const rawSanchayapatra = getNumVal("invSanchayapatra");
             const rawDps = getNumVal("invDps");
@@ -1251,44 +1257,39 @@
             const allowableDps = Math.min(rawDps, 120000);
             const allowableTotalInv = allowableSanchayapatra + allowableDps + lifeInsurance + providentFund + shareMutual + welfareGroup + pensionScheme + zakatDonation;
 
-            // Tax Rebate Calculation (Section 78)
+            // Tax Rebate Calculation (Section 78) - based on total income ('ক') and allowable investment ('খ')
             const rebateOptA = income * rule.rebate.incomeRate;
             const rebateOptB = allowableTotalInv * rule.rebate.invRate;
             const rebateOptC = rule.rebate.maxCap;
 
             let eligibleRebate = 0;
-            if (grossTax > 0) {
+            if (grossPlusSurcharge > 0) {
                 eligibleRebate = Math.min(rebateOptA, rebateOptB, rebateOptC);
             }
 
-            const taxAfterRebate = Math.max(0, grossTax - eligibleRebate);
+            const taxAfterRebate = Math.max(0, grossPlusSurcharge - eligibleRebate);
             const taxWithMinimum = income > taxFreeLimit ? Math.max(taxAfterRebate, minTax) : 0;
-            const payableTax = Math.max(0, taxWithMinimum - totalTaxPaidCredits);
-
-            // Surcharge Calculation on Payable Tax ("প্রদেয় করের ওপর")
-            const isSurchargeChecked = document.getElementById("surchargeCheckbox").checked;
-            const surchargeRate = isSurchargeChecked ? parseFloat(document.getElementById("surchargeCondition").value) || 0 : 0;
-            const surchargeAmount = payableTax * surchargeRate;
-            const totalPayableWithSurcharge = payableTax + surchargeAmount;
+            const totalPayableWithSurcharge = Math.max(0, taxWithMinimum - totalTaxPaidCredits);
 
             // Update UI
             document.getElementById("resExemption").innerText = bnMoney(taxFreeLimit);
             document.getElementById("resTotalIncome").innerText = bnMoney(income);
             document.getElementById("resTaxable").innerText = bnMoney(taxableIncome);
             document.getElementById("resGrossTax").innerText = bnMoney(grossTax);
+            
+            document.getElementById("surchargeRateText").innerText = Math.round(surchargeRate * 100).toLocaleString("bn-BD") + "%";
+            document.getElementById("resSurcharge").innerText = bnMoney(surchargeAmount);
+            document.getElementById("resGrossPlusSurcharge").innerText = bnMoney(grossPlusSurcharge);
+
             document.getElementById("resInvestments").innerText = `${bnMoney(actualTotalInv)} / ${bnMoney(allowableTotalInv)}`;
             document.getElementById("rebateOptA").innerText = bnMoney(rebateOptA);
             document.getElementById("rebateOptB").innerText = bnMoney(rebateOptB);
             document.getElementById("resRebate").innerText = bnMoney(eligibleRebate);
             document.getElementById("resTaxAfterRebate").innerText = bnMoney(taxAfterRebate);
-            document.getElementById("resTaxWithMin").innerText = bnMoney(taxWithMinimum);
+            document.getElementById("resTaxWithMin").innerText = bnMoney(taxWithMin = taxWithMinimum);
             document.getElementById("resTds").innerText = bnMoney(tdsAmount);
             document.getElementById("resAdvanceTax").innerText = bnMoney(advanceTaxAmount);
             document.getElementById("resReturnTax173").innerText = bnMoney(returnTax173Amount);
-            document.getElementById("resPayableTax").innerText = bnMoney(payableTax);
-
-            document.getElementById("surchargeRateText").innerText = Math.round(surchargeRate * 100).toLocaleString("bn-BD") + "%";
-            document.getElementById("resSurcharge").innerText = bnMoney(surchargeAmount);
             document.getElementById("resTotalPayableWithSurcharge").innerText = bnMoney(totalPayableWithSurcharge);
         }
 
