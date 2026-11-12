@@ -119,7 +119,7 @@
             color: var(--accent);
         }
 
-        /* --- Section 1: Calculator with Rebate --- */
+        /* --- Section 1: Calculator with Rebate & Surcharge --- */
         .calculator-grid {
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
@@ -142,8 +142,14 @@
             gap: 1rem;
         }
 
-        @media (max-width: 550px) {
-            .form-row {
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.85rem;
+        }
+
+        @media (max-width: 650px) {
+            .form-row, .form-row-3 {
                 grid-template-columns: 1fr;
             }
         }
@@ -303,13 +309,84 @@
             margin: 0.25rem 0;
         }
 
+        .result-item.payable-tax {
+            background-color: #f1f5f9;
+            padding: 0.65rem 0.65rem;
+            border-radius: 6px;
+            border-top: 1.5px solid var(--primary);
+            border-bottom: 1.5px solid var(--primary);
+            margin-top: 0.45rem;
+            font-weight: 700;
+            font-size: 1.02rem;
+            color: var(--text-main);
+        }
+
+        .surcharge-panel {
+            background-color: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 0.75rem 0.85rem;
+            margin: 0.65rem 0;
+        }
+
+        .surcharge-check-row {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            cursor: pointer;
+            font-weight: 700;
+            color: #92400e;
+            font-size: 0.94rem;
+        }
+
+        .surcharge-check-row input {
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+            accent-color: #d97706;
+        }
+
+        .surcharge-dropdown-wrap {
+            margin-top: 0.65rem;
+            display: none;
+        }
+
+        .surcharge-dropdown-wrap label {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: #78350f;
+            margin-bottom: 0.35rem;
+        }
+
+        .surcharge-dropdown-wrap select {
+            width: 100%;
+            padding: 0.55rem 0.7rem;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            font-size: 0.86rem;
+            background-color: #fff;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .surcharge-amount-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.6rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed #f59e0b;
+            font-size: 0.92rem;
+            color: #92400e;
+        }
+
         .result-item.total {
             border-bottom: none;
             border-top: 2px solid var(--primary);
-            margin-top: 0.5rem;
+            margin-top: 0.6rem;
             padding-top: 0.85rem;
             font-weight: 700;
-            font-size: 1.12rem;
+            font-size: 1.15rem;
             color: var(--primary-dark);
         }
 
@@ -604,6 +681,12 @@
             #taxResultPrintArea .btn-print { display: none !important; }
             #taxResultPrintArea .result-item { color: #111 !important; border-color: #aaa !important; padding: 4px 0 !important; }
             #taxResultPrintArea .result-item.highlight-rebate { background: #f3f4f6 !important; color: #111 !important; border: 1px solid #999 !important; }
+            #taxResultPrintArea .result-item.payable-tax { background: #f3f4f6 !important; color: #111 !important; border-top: 1.5px solid #333 !important; border-bottom: 1.5px solid #333 !important; }
+            #taxResultPrintArea .surcharge-panel { background: #fff !important; border: 1px solid #777 !important; color: #111 !important; padding: 5px 7px !important; }
+            #taxResultPrintArea .surcharge-check-row { color: #111 !important; }
+            #taxResultPrintArea .surcharge-dropdown-wrap label { color: #111 !important; }
+            #taxResultPrintArea .surcharge-dropdown-wrap select { border: 1px solid #777 !important; color: #111 !important; }
+            #taxResultPrintArea .surcharge-amount-row { color: #111 !important; border-top-color: #777 !important; }
             #taxResultPrintArea .result-item.total { color: #111 !important; border-top: 2px solid #333 !important; }
             #taxResultPrintArea .rebate-breakdown-box { border: 1px solid #777 !important; background: #fff !important; padding: 6px 8px !important; }
             #taxResultPrintArea .rebate-breakdown-box h5 { color: #111 !important; }
@@ -691,10 +774,25 @@
                             </div>
                         </div>
 
-                        <div class="form-group" style="margin-bottom: 0.6rem;">
-                            <label for="tdsAmount">উৎসে কর্তিত / অগ্রিম পরিশোধিত কর (৳)</label>
-                            <span class="sub-label">বেতন, ব্যাংক সুদ বা সঞ্চয়পত্র থেকে কর্তিত বা অগ্রিম কর</span>
-                            <input type="number" id="tdsAmount" class="form-control" min="0" value="0" oninput="calculateTax()">
+                        <!-- Separated Tax Credits: TDS, Advance Tax, and Return Paid Tax (Sec 173) -->
+                        <div class="form-row-3">
+                            <div class="form-group" style="margin-bottom: 0.6rem;">
+                                <label for="tdsAmount">উৎসে কর (৳)</label>
+                                <span class="sub-label">বেতন, ব্যাংক সুদ বা সঞ্চয়পত্র</span>
+                                <input type="number" id="tdsAmount" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0.6rem;">
+                                <label for="advanceTaxAmount">অগ্রিম পরিশোধিত কর (৳)</label>
+                                <span class="sub-label">অগ্রিম আয়কর (AIT)</span>
+                                <input type="number" id="advanceTaxAmount" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0.6rem;">
+                                <label for="returnTax173Amount">রিটার্নের সাথে পরিশোধিত কর (১৭৩ ধারা) (৳)</label>
+                                <span class="sub-label">রিটার্ন দাখিলের সময় প্রদত্ত</span>
+                                <input type="number" id="returnTax173Amount" class="form-control" min="0" value="0" oninput="calculateTax()">
+                            </div>
                         </div>
 
                         <div class="checkbox-group">
@@ -813,8 +911,8 @@
                             <strong id="rebateOptB">৳ ০</strong>
                         </div>
                         <div class="rebate-row">
-                            <span>(গ) সর্বোচ্চ অনুমোদিত সীমা (২০২৩–২৪ থেকে প্রযোজ্য):</span>
-                            <strong id="rebateOptC">৳ ১০,০০,০০০</strong>
+                            <span>(গ) সর্বোচ্চ অনুমোদিত সীমা:</span>
+                            <strong id="rebateOptC">৳ ৭,৫০,০০০</strong>
                         </div>
                     </div>
 
@@ -831,12 +929,52 @@
                         <strong id="resTaxWithMin">৳ ০</strong>
                     </div>
                     <div class="result-item">
-                        <span>বাদ: উৎসে কর্তিত / অগ্রিম পরিশোধিত কর:</span>
+                        <span>বাদ: উৎসে কর:</span>
                         <strong id="resTds">৳ ০</strong>
                     </div>
+                    <div class="result-item">
+                        <span>বাদ: অগ্রিম পরিশোধিত কর:</span>
+                        <strong id="resAdvanceTax">৳ ০</strong>
+                    </div>
+                    <div class="result-item">
+                        <span>বাদ: রিটার্নের সাথে পরিশোধিত কর (১৭৩ ধারা):</span>
+                        <strong id="resReturnTax173">৳ ০</strong>
+                    </div>
+
+                    <!-- Payable Tax (titled simply "প্রদেয় কর") -->
+                    <div class="result-item payable-tax">
+                        <span>প্রদেয় কর:</span>
+                        <strong id="resPayableTax">৳ ০</strong>
+                    </div>
+
+                    <!-- Surcharge Checkbox & Dropdown Section -->
+                    <div class="surcharge-panel">
+                        <label class="surcharge-check-row" for="surchargeCheckbox">
+                            <input type="checkbox" id="surchargeCheckbox" onchange="toggleSurcharge()">
+                            <span>সারচার্জ প্রযোজ্য হলে টিক দিন</span>
+                        </label>
+
+                        <div class="surcharge-dropdown-wrap" id="surchargeDropdownWrap">
+                            <label for="surchargeCondition">নিট পরিসম্পদের পরিমাণ / শর্ত নির্বাচন করুন:</label>
+                            <select id="surchargeCondition" onchange="calculateTax()">
+                                <option value="0">৪ (চার) কোটি টাকা পর্যন্ত — শূন্য (০%)</option>
+                                <option value="0.10">৪ কোটি টাকার অধিক কিন্তু ১০ কোটি টাকার অধিক নয়; অথবা নিজ নামে একের অধিক মোটর গাড়ি থাকলে; অথবা মোট ৮,০০০ বর্গফুটের অধিক আয়তনের গৃহ-সম্পত্তি থাকলে — ১০%</option>
+                                <option value="0.20">১০ কোটি টাকার অধিক কিন্তু ২০ কোটি টাকার অধিক নয় — ২০%</option>
+                                <option value="0.30">২০ কোটি টাকার অধিক কিন্তু ৫০ কোটি টাকার অধিক নয় — ৩০%</option>
+                                <option value="0.35">৫০ (পঞ্চাশ) কোটি টাকার অধিক — ৩৫%</option>
+                            </select>
+
+                            <div class="surcharge-amount-row">
+                                <span>সারচার্জের পরিমাণ (<span id="surchargeRateText">০%</span>):</span>
+                                <strong id="resSurcharge">৳ ০</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Payable Tax including Surcharge -->
                     <div class="result-item total">
-                        <span>ধারা ১৭৩ অনুযায়ী নিট প্রদেয় কর:</span>
-                        <strong id="resNetTax">৳ ০</strong>
+                        <span>প্রদেয় মোট কর:</span>
+                        <strong id="resTotalPayableWithSurcharge">৳ ০</strong>
                     </div>
 
                     <!-- Applicable Slabs Table -->
@@ -999,6 +1137,13 @@
             return isNaN(val) || val < 0 ? 0 : val;
         }
 
+        function toggleSurcharge() {
+            const isChecked = document.getElementById("surchargeCheckbox").checked;
+            const wrap = document.getElementById("surchargeDropdownWrap");
+            wrap.style.display = isChecked ? "block" : "none";
+            calculateTax();
+        }
+
         function updatePrintMeta() {
             const yearSelect = document.getElementById("taxYear");
             const categorySelect = document.getElementById("category");
@@ -1022,7 +1167,13 @@
             const category = document.getElementById("category").value;
             const disabledCount = getNumVal("disabledDependents");
             const income = getNumVal("annualIncome");
+            
+            // Separate tax credits: TDS, Advance Tax, and Return Paid Tax (Sec 173)
             const tdsAmount = getNumVal("tdsAmount");
+            const advanceTaxAmount = getNumVal("advanceTaxAmount");
+            const returnTax173Amount = getNumVal("returnTax173Amount");
+            const totalTaxPaidCredits = tdsAmount + advanceTaxAmount + returnTax173Amount;
+
             const isNewTaxpayer = document.getElementById("isNewTaxpayer").checked;
             const minTax = isNewTaxpayer ? 1000 : MINIMUM_TAX_CITY_CORP;
 
@@ -1052,7 +1203,12 @@
                 document.getElementById("resTaxAfterRebate").innerText = bnMoney(0);
                 document.getElementById("resTaxWithMin").innerText = bnMoney(0);
                 document.getElementById("resTds").innerText = bnMoney(tdsAmount);
-                document.getElementById("resNetTax").innerText = bnMoney(0);
+                document.getElementById("resAdvanceTax").innerText = bnMoney(advanceTaxAmount);
+                document.getElementById("resReturnTax173").innerText = bnMoney(returnTax173Amount);
+                document.getElementById("resPayableTax").innerText = bnMoney(0);
+                document.getElementById("surchargeRateText").innerText = "০%";
+                document.getElementById("resSurcharge").innerText = bnMoney(0);
+                document.getElementById("resTotalPayableWithSurcharge").innerText = bnMoney(0);
                 return;
             }
 
@@ -1107,7 +1263,13 @@
 
             const taxAfterRebate = Math.max(0, grossTax - eligibleRebate);
             const taxWithMinimum = income > taxFreeLimit ? Math.max(taxAfterRebate, minTax) : 0;
-            const netPayable = Math.max(0, taxWithMinimum - tdsAmount);
+            const payableTax = Math.max(0, taxWithMinimum - totalTaxPaidCredits);
+
+            // Surcharge Calculation on Payable Tax ("প্রদেয় করের ওপর")
+            const isSurchargeChecked = document.getElementById("surchargeCheckbox").checked;
+            const surchargeRate = isSurchargeChecked ? parseFloat(document.getElementById("surchargeCondition").value) || 0 : 0;
+            const surchargeAmount = payableTax * surchargeRate;
+            const totalPayableWithSurcharge = payableTax + surchargeAmount;
 
             // Update UI
             document.getElementById("resExemption").innerText = bnMoney(taxFreeLimit);
@@ -1121,7 +1283,13 @@
             document.getElementById("resTaxAfterRebate").innerText = bnMoney(taxAfterRebate);
             document.getElementById("resTaxWithMin").innerText = bnMoney(taxWithMinimum);
             document.getElementById("resTds").innerText = bnMoney(tdsAmount);
-            document.getElementById("resNetTax").innerText = bnMoney(netPayable);
+            document.getElementById("resAdvanceTax").innerText = bnMoney(advanceTaxAmount);
+            document.getElementById("resReturnTax173").innerText = bnMoney(returnTax173Amount);
+            document.getElementById("resPayableTax").innerText = bnMoney(payableTax);
+
+            document.getElementById("surchargeRateText").innerText = Math.round(surchargeRate * 100).toLocaleString("bn-BD") + "%";
+            document.getElementById("resSurcharge").innerText = bnMoney(surchargeAmount);
+            document.getElementById("resTotalPayableWithSurcharge").innerText = bnMoney(totalPayableWithSurcharge);
         }
 
         function resetForm() {
@@ -1130,6 +1298,8 @@
             document.getElementById("disabledDependents").value = 0;
             document.getElementById("annualIncome").value = "";
             document.getElementById("tdsAmount").value = 0;
+            document.getElementById("advanceTaxAmount").value = 0;
+            document.getElementById("returnTax173Amount").value = 0;
             document.getElementById("isNewTaxpayer").checked = false;
 
             document.getElementById("invSanchayapatra").value = 0;
@@ -1140,6 +1310,10 @@
             document.getElementById("invWelfareGroup").value = 0;
             document.getElementById("invPensionScheme").value = 0;
             document.getElementById("invZakatDonation").value = 0;
+
+            document.getElementById("surchargeCheckbox").checked = false;
+            document.getElementById("surchargeCondition").value = "0";
+            document.getElementById("surchargeDropdownWrap").style.display = "none";
 
             calculateTax();
         }
